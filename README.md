@@ -1,0 +1,2 @@
+# ezbot
+Bot for Ezhome
