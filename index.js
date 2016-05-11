@@ -1,8 +1,12 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var request = require('request');
 
 app.use(bodyParser.json());
+
+var verify_token = 'blah_kevin_blah';
+var token = "EAADqBHxn6U4BAN8GksPJ0fQS5GaVZA03Oc9x0Nj4OolLnGFmvfmetYA7dgXqt7jUJdogJ4ZBZAls1mw4fYZCm9lSP6hR4aPZCr9EnruhK36qA00tU4cN6RcPFsU8keSC08R3KuZATrtCnnaFVc6wz9iiWxzWE1KlozFXzWcFjdJiOrZAZBcaZAftmW8ZAFZAlSK7J0ZD";
 
 console.log("hello");
 
@@ -32,7 +36,7 @@ app.post('/webhook/', function (req, res) {
 });
 
 app.get('/webhook', function (req, res) {
-  if (req.query['hub.verify_token'] === 'blah_kevin_blah') {
+  if (req.query['hub.verify_token'] === verify_token) {
     res.send(req.query['hub.challenge']);
   } else {
     res.send('Error, wrong validation token');    
