@@ -1,0 +1,25 @@
+{
+  "name": "ezbot",
+  "version": "1.0.0",
+  "description": "Bot for Ezhome",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "2.4.1",
+    "express": "4.13.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeterGok/ezbot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PeterGok/ezbot/issues"
+  },
+  "homepage": "https://github.com/PeterGok/ezbot#readme"
+}
