@@ -1,6 +1,6 @@
 {
   "name": "ezbot",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Bot for Ezhome",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,11 @@
     "type": "git",
     "url": "git+https://github.com/PeterGok/ezbot.git"
   },
-  "keywords": [],
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
