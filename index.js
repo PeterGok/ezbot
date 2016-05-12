@@ -16,7 +16,8 @@ var ConversationState = {
   RESPONDED_AVAILABLE: 2,
   RESPONDED_NOT: 3,
   PROMPT_SIGNUP: 4,
-  RESPONDED: 5
+  RESPONDED: 5,
+  GOODBYE: 6
 };
 
 var AddressType = {
@@ -68,10 +69,11 @@ Conversation.prototype.onMessage = function(event) {
       this.state = ConversationState.RESPONDED_NOT;
       conversations[sender] = null;
     } else {
-      sendTextMessage(sender, "Thanks. Depending on whether you want weekly or bi weekly service we can service your property for $15/week or $23 every two weeks");
+      sendTextMessage(sender, "Thanks. We're using satellite imagery for your property to give you a customized quote.");
+      setTimeout(function() { sendTextMessage(sender, "Depending on whether you want weekly or bi weekly service we can service your property for $15/week or $23 every two weeks");
       setTimeout(function() { sendTextMessage(sender, "This will include, hedging, lawn mowing, pruning, and blowing.");
       setTimeout(function() { sendTextMessage(sender, "Additionally we offer dog waste pickup and weed spraying (with roundup) for an extra charge.");
-      setTimeout(function() { sendTextMessage(sender, "Would you like to sign up?"); }, 3000); }, 1000); }, 1000);
+      setTimeout(function() { sendTextMessage(sender, "Would you like to sign up?"); }, 3000); }, 800); }, 800); }, 3500);
       this.state = ConversationState.RESPONDED_AVAILABLE;
     }
   } else if (this.state = ConversationState.RESPONDED_AVAILABLE) {
@@ -80,11 +82,14 @@ Conversation.prototype.onMessage = function(event) {
 
     if (isYesAns) {
       sendTextMessage(sender, "Awesome! We can't wait to get you started. Sign up below:");
-      setTimeout(function() { sendTextMessage(sender, "www.ezhome.com"); conversations[sender] = null; }, 300);
+      setTimeout(function() { sendTextMessage(sender, "www.ezhome.com");}, 300);
     } else {
       sendTextMessage(sender, "Thanks, bye bye!");
       conversations[sender] = null;
     }
+  } else if (this.state == ConversationState.RESPONDED) {
+    sendTextMessage(sender, "Bye!");
+    conversations[sender] = null;
   }
 }
 
