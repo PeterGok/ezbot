@@ -32,6 +32,9 @@ function Conversation (type) {
 }
 
 function verifyAddress(address) {
+  if (address == "123 far away street") {
+    return AddressType.NOT_SERVICEABLE;
+  }
   return AddressType.SERVICEABLE;
 }
 
@@ -43,7 +46,7 @@ Conversation.prototype.onMessage = function(event) {
   }
 
   if (this.state == ConversationState.BEFORE) {
-    sendTextMessage(sender, "Hello! Intersted in a free quote for your property? Please respond back with your address.");
+    sendTextMessage(sender, "Hey, we have 6 gardeners servicing your neighbourhood next week. Interested in a free quote for your property? Respond back with your address.");
     this.state = ConversationState.PROMPT;
   } else if (this.state == ConversationState.PROMPT) {
     var address = event.message.text;
@@ -57,15 +60,12 @@ Conversation.prototype.onMessage = function(event) {
       conversations[sender] = null;
     } else {
       sendTextMessage(sender, "Thanks. Depending on whether you want weekly or bi weekly service we can service your property for $15/week or $23 every two weeks");
-      sendTextMessage(sender, "This will include, hedging, lawn mowing, pruning, and blowing.");
-      sendTextMessage(sender, "Additionally we offer dog waste pickup and weed spraying (with roundup) for an extra charge.");
-      sendTextMessage(sender, "Click the link below if you would like to sign up:");
-      sendTextMessage(sender, "www.ezhome.com");
+      setTimeout(function() { sendTextMessage(sender, "This will include, hedging, lawn mowing, pruning, and blowing.");
+      setTimeout(function() { sendTextMessage(sender, "Additionally we offer dog waste pickup and weed spraying (with roundup) for an extra charge.");
+      setTimeout(function() { sendTextMessage(sender, "Click the link below if you would like to sign up:");
+      setTimeout(function() { sendTextMessage(sender, "www.ezhome.com"); conversations[sender] = null;}, 400); }, 800); }, 300); }, 500);
       this.state = ConversationState.RESPONDED_YES;
-      conversations[sender] = null;
     }
-  } else {
-    sendTextMessage(sender, "Please visit our website for more information: www.ezhome.com");
   }
 }
 
