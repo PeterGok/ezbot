@@ -76,7 +76,7 @@ Conversation.prototype.onMessage = function(event) {
       setTimeout(function() { sendTextMessage(sender, "Would you like to sign up?"); }, 3000); }, 800); }, 800); }, 3500);
       this.state = ConversationState.RESPONDED_AVAILABLE;
     }
-  } else if (this.state = ConversationState.RESPONDED_AVAILABLE) {
+  } else if (this.state == ConversationState.RESPONDED_AVAILABLE) {
     var text = event.message.text;
     var isYesAns = isYes(text);
 
@@ -91,6 +91,7 @@ Conversation.prototype.onMessage = function(event) {
   } else if (this.state == ConversationState.RESPONDED) {
     sendTextMessage(sender, "Bye!");
     conversations[sender] = null;
+    this.state = ConversationState.GOODBYE;
   }
 }
 
