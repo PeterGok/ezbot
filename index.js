@@ -83,6 +83,7 @@ Conversation.prototype.onMessage = function(event) {
     if (isYesAns) {
       sendTextMessage(sender, "Awesome! We can't wait to get you started. Sign up below:");
       setTimeout(function() { sendTextMessage(sender, "www.ezhome.com");}, 300);
+      this.state = ConversationState.RESPONDED;
     } else {
       sendTextMessage(sender, "Thanks, bye bye!");
       conversations[sender] = null;
