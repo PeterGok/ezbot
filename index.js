@@ -31,21 +31,21 @@ function Conversation (type) {
   this.state = ConversationState.BEFORE;
   this.user_address = "";
   this.valid_address = false;
-}
+};
 
 function isYes(text) {
   if (text.toLowerCase() == "yes") {
     return true;
   }
   return false;
-}
+};
 
 function verifyAddress(address) {
   if (address == "123 far away street") {
     return AddressType.NOT_SERVICEABLE;
   }
   return AddressType.SERVICEABLE;
-}
+};
 
 Conversation.prototype.onMessage = function(event) {
   var sender = event.sender.id;
@@ -76,9 +76,9 @@ Conversation.prototype.onMessage = function(event) {
     }
   } else if (this.state = ConversationState.RESPONDED_AVAILABLE) {
     var text = event.message.text;
-    var isYes = isYes(text);
+    var isYesAns = isYes(text);
 
-    if (isYes) {
+    if (isYesAns) {
       sendTextMessage(sender, "Awesome! We can't wait to get you started. Sign up below:");
       setTimeout(function() { sendTextMessage(sender, "www.ezhome.com"); conversations[sender] = null; }, 300);
     } else {
