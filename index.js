@@ -39,11 +39,11 @@ Conversation.prototype.onMessage = function(event) {
   var sender = event.sender.id;
 
   if (!event.message || !event.message.text) {
-    sendTextMessage(sender, "Sorry, invalid message. Please try again.");
+    return;
   }
 
   if (this.state == ConversationState.BEFORE) {
-    text = "Hello! Intersted in a free quote for your property? Please respond back with your address.";
+    sendTextMessage(sender, "Hello! Intersted in a free quote for your property? Please respond back with your address.");
     this.state = ConversationState.PROMPT;
   } else if (this.state == ConversationState.PROMPT) {
     var address = event.message.text;
@@ -88,11 +88,6 @@ app.post('/webhook/', function (req, res) {
         }
 
         conversations[sender].onMessage(event);
-
-        if (event.message && event.message.text) {
-            var text = event.message.text;
-            sendTextMessage(sender, "Echo: " + text.substring(0, 200));
-        }
     }
 
     res.sendStatus(200);
