@@ -6,7 +6,7 @@ var request = require('request');
 app.use(bodyParser.json());
 
 var verify_token = 'blah_kevin_blah';
-var token = "EAADqBHxn6U4BAN8GksPJ0fQS5GaVZA03Oc9x0Nj4OolLnGFmvfmetYA7dgXqt7jUJdogJ4ZBZAls1mw4fYZCm9lSP6hR4aPZCr9EnruhK36qA00tU4cN6RcPFsU8keSC08R3KuZATrtCnnaFVc6wz9iiWxzWE1KlozFXzWcFjdJiOrZAZBcaZAftmW8ZAFZAlSK7J0ZD";
+var token = "EAADqBHxn6U4BAACrC2jZAEtfCG0I9bSYnMJQyWlXAj1WkH9FTnIvCDSN1AEQZCF6MWEV18SbkvoofPJJUuXCgZAVlRy5sWZBe8M4OiULqBTXqsXM7iDbEXE3kuRZB9jjDTLA5Mjft8WXo4IKobdvnQ3M8CAhCXsnMZCG5XzYm5PHQM8YkyvbqOJeoZBvbf3NKIZD";
 
 console.log("hello");
 
@@ -74,7 +74,7 @@ Conversation.prototype.onMessage = function(event) {
       setTimeout(function() { sendTextMessage(sender, "Would you like to sign up?"); }, 3000); }, 1000); }, 1000);
       this.state = ConversationState.RESPONDED_AVAILABLE;
     }
-  } else if (this.state = RESPONDED_AVAILABLE) {
+  } else if (this.state = ConversationState.RESPONDED_AVAILABLE) {
     var text = event.message.text;
     var isYes = isYes(text);
 
