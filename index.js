@@ -13,8 +13,10 @@ console.log("hello");
 var ConversationState = {
   BEFORE: 0,
   PROMPT: 1,
-  RESPONDED_YES: 2,
-  RESPONDED_NO: 3
+  RESPONDED_AVAILABLE: 2,
+  RESPONDED_NOT: 3,
+  PROMPT_SIGNUP: 4,
+  RESPONDED: 5
 };
 
 var AddressType = {
@@ -29,6 +31,13 @@ function Conversation (type) {
   this.state = ConversationState.BEFORE;
   this.user_address = "";
   this.valid_address = false;
+}
+
+function isYes(text) {
+  if (text.toLowerCase() == "yes") {
+    return true;
+  }
+  return false;
 }
 
 function verifyAddress(address) {
@@ -55,16 +64,26 @@ Conversation.prototype.onMessage = function(event) {
     if (addressType == AddressType.INVALID) {
       sendTextMessage(sender, "Sorry, that's not a valid address, please try again.");
     } else if (addressType == AddressType.NOT_SERVICEABLE) {
-      sendTextMessage(sender, "Sorry, we don't currently service that area, but we are hoping to roll out soon!");
-      this.state = ConversationState.RESPONDED_NO;
+      sendTextMessage(sender, "Sorry, we don't currently service that area, but we are hoping to roll out soon! Thanks, Bye!");
+      this.state = ConversationState.RESPONDED_NOT;
       conversations[sender] = null;
     } else {
       sendTextMessage(sender, "Thanks. Depending on whether you want weekly or bi weekly service we can service your property for $15/week or $23 every two weeks");
       setTimeout(function() { sendTextMessage(sender, "This will include, hedging, lawn mowing, pruning, and blowing.");
       setTimeout(function() { sendTextMessage(sender, "Additionally we offer dog waste pickup and weed spraying (with roundup) for an extra charge.");
-      setTimeout(function() { sendTextMessage(sender, "Click the link below if you would like to sign up:");
-      setTimeout(function() { sendTextMessage(sender, "www.ezhome.com"); conversations[sender] = null;}, 400); }, 800); }, 300); }, 500);
-      this.state = ConversationState.RESPONDED_YES;
+      setTimeout(function() { sendTextMessage(sender, "Would you like to sign up?"); }, 3000); }, 1000); }, 1000);
+      this.state = ConversationState.RESPONDED_AVAILABLE;
+    }
+  } else if (this.state = RESPONDED_AVAILABLE) {
+    var text = event.message.text;
+    var isYes = isYes(text);
+
+    if (isYes) {
+      sendTextMessage(sender, "Awesome! We can't wait to get you started. Sign up below:");
+      setTimeout(function() { sendTextMessage(sender, "www.ezhome.com"); conversations[sender] = null; }, 300);
+    } else {
+      sendTextMessage(sender, "Thanks, bye bye!");
+      conversations[sender] = null;
     }
   }
 }
