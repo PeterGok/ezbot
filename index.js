@@ -35,7 +35,7 @@ function verifyAddress(address) {
   return AddressType.SERVICEABLE;
 }
 
-Conversation.prototype.onMessage(event) {
+Conversation.prototype.onMessage = function(event) {
   var sender = event.sender.id;
 
   if (!event.message || !event.message.text) {
@@ -84,7 +84,7 @@ app.post('/webhook/', function (req, res) {
 
         var conversation = conversations[sender];
         if (!conversation) {
-          converstions[sender] = new Conversation();
+          conversations[sender] = new Conversation();
         }
 
         conversations[sender].onMessage(event);
